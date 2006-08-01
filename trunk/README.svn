@@ -1,0 +1,9 @@
+# Use this command to anonymously check out the latest project source code:
+svn checkout http://ortholytics.googlecode.com/svn/trunk/ ortholytics
+
+# Admin
+# http://svnbook.red-bean.com/nightly/en/svn.intro.quickstart.html
+# svn import /home/avilella/ortholytics/ https://ortholytics.googlecode.com/svn -m "initial import"
+# svn checkout https://ortholytics.googlecode.com/svn/trunk/ ortholytics --username avilella
+
+
