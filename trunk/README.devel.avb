@@ -1,0 +1,41 @@
+# Ortholytics strongly depends on bioperl-live and bioperl-run. 
+
+# It also depends on a number of perl modules that can be found at CPAN.
+# Check README.all_dependencies.txt to get an idea of the modules you
+# may want to install
+# egrep '^use.+\:\:.+' * > README.all_dependencies.txt
+
+# This project source code is hosted in http://code.google.com/p/ortholytics/source
+# See README.svn
+
+# This project used to be hosted in Sourceforge, and it still is, but
+# not updated. The reason being SF can be quite slow for CVS
+# administration some times.
+
+##  # Initial import was done with this command:
+##  # cvs -d:ext:avilellab@cvs.sourceforge.net:/cvsroot/ortholytics import -m 'first import sf ortholytics' ortholytics albertjvilella start
+##  # cvs -d:ext:avilellab@cvs.sourceforge.net:/cvsroot/ortholytics commit -m 'adding readmes' 
+##  
+##  # This are the file release commands:
+##  cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/ortholytics login
+##  ##
+##  cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/ortholytics co -P ortholytics
+##  export VERSION=1.0.0
+##  mv ortholytics ortholytics-$VERSION
+##  rm ortholytics-$VERSION/CVS/ -rf
+##  tar czf ortholytics-$VERSION.tar.gz ortholytics-$VERSION/
+##  echo "put ortholytics-$VERSION.tar.gz"
+##  
+##  lftp upload.sourceforge.net 
+##  cd incoming
+##  put ortholytics-$VERSION.tar.gz
+##  
+##  #MANUALLY Put the ortholytics*something*.gz file with the 'put file' command
+##  #Finish the Release via sf.net/projects/ortholytics - Admin - File Releases
+##  # Add file release in 'ortholytics' section
+##  # Name of the release should be ortholytics-{version} (e.g. ortholytics-1.0.0)
+##  # Write something along the lines of this (see below) in Release notes form
+##  # Copy paste the Changelog entry in Changelog form
+##  # Check the files you updated (make sure the upload finished) in the form
+##  # Change the platform and (Source .gz) tags at the bottom
+##  # Logout and make sure it all went ok accessing the files as an anonymous user
