@@ -677,7 +677,7 @@ $lsf_mpi_run .= "export MESSAGE_LOGGING=0.0\n" if (5 == $type_ana);
 $lsf_mpi_run .= "## hyphy options end\n\n";
 $lsf_mpi_run .= "export MPIPARTITIONS=$cpunum\n" if (5 == $type_ana);
 $lsf_mpi_run .= "# BSUB -J $analysis\n";
-$lsf_mpi_run .= "# BSUB -q parallel\n";
+$lsf_mpi_run .= "# BSUB -q $class\n";
 $lsf_mpi_run .= "# BSUB -n $cpunum\n";
 $lsf_mpi_run .= "# BSUB -R \"obacs\"\n";
 $lsf_mpi_run .= "# BSUB -o $workdir/$analysis/stdout.$analysis.log\n";
