@@ -56,7 +56,7 @@ BEGIN {$ENV{AMAPDIR} = '/home/avilella/9_opl/amap/amap/'; }
 
 
 my ($dir, $outdir, $subdir, $file, $input, $aa_input, $seq, 
-    @seq_array, $seq_array_ref, $aln, $pseq, $email,
+    @seq_array, $seq_array_ref, $aln, $pseq, $email, $debug, 
     $codontable, $tableid, @params, $factory, $out, 
 #     $matrix
    ) = "";
@@ -66,7 +66,7 @@ GetOptions(
 	   'dir:s' => \$dir,
 	   'o|outdir:s' => \$outdir,
 	   'e|email:s' => \$email,
-
+	   'debug:s' => \$debug,
           );
 
 # $codontable = Bio::Tools::CodonTable->new( -id => $tableid);
@@ -113,6 +113,7 @@ while (defined($subdir = readdir(DIR))) {
                  'train'   => "$dir/$subdir/$outdir/train.params",
                 );
             $factory->outfile_name("$dir/$subdir/$outdir/train.params");
+            my $version = $factory->version if ($debug);
 
             my $amap_present = $factory->executable();
             unless ($amap_present) {
