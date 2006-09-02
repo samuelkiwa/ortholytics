@@ -42,6 +42,8 @@ use Bio::Align::DNAStatistics;
 use strict;
 use Getopt::Long;
 use File::Basename;
+use Devel::Size qw(size total_size);
+use Devel::Peek;
 
 my ($inputfile,$yesnoopt);
 GetOptions(
