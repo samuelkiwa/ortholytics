@@ -52,7 +52,7 @@ use Bio::Tools::GuessSeqFormat;
 # use Mail::Sendmail;
 
 # BEGIN {$ENV{AMAPDIR} = '/home/avb/9_opl/amap/amap/'; }
-BEGIN {$ENV{AMAPDIR} = '/home/avilella/9_opl/amap/amap/'; }
+BEGIN {$ENV{AMAPDIR} = '/home/avb/9_opl/amap/amap/'; }
 
 
 my ($dir, $outdir, $subdir, $file, $input, $aa_input, $seq, 
@@ -106,8 +106,6 @@ while (defined($subdir = readdir(DIR))) {
             # Build a amap alignment factory
             $factory = new Bio::Tools::Run::Alignment::Amap
                 (
-                 'iterative-refinement'  => '1000',
-                 'consistency'   => '5',
                  'emissions' => '',
                  'verbose' => '',
                  'train'   => "$dir/$subdir/$outdir/train.params",
@@ -128,8 +126,6 @@ while (defined($subdir = readdir(DIR))) {
 
             $factory = new Bio::Tools::Run::Alignment::Amap
                 (
-                 'iterative-refinement'  => '1000',
-                 'consistency'   => '5',
                  'verbose' => '',
                  'annot'   => "$dir/$subdir/$outdir/annotation.scores",
                  'paramfile'   => "$dir/$subdir/$outdir/train.params",
