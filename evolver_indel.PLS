@@ -55,8 +55,8 @@ GetOptions(
 
 my $fakereplicates = $fakerep || 1;
 
-BEGIN {$ENV{EVOLVER_INDELDIR} = '/home/avb/9_opl/evolver_indel/evolver_indel'; };
-#BEGIN {$ENV{PAMLDIR} = '/home/avilella/9_opl/paml/_paml3.14b/paml3.14/src'; };
+#BEGIN {$ENV{EVOLVER_INDELDIR} = '/home/avb/9_opl/evolver_indel/evolver_indel'; };
+BEGIN {$ENV{PAMLDIR} = '/home/avilella/9_opl/paml/_paml3.14b/paml3.14/src'; };
 
 my $treeio = new Bio::TreeIO
     (
@@ -87,6 +87,7 @@ if ($debug) {
 }
 
 foreach my $replicate (1 .. $fakereplicates) {
+    $replicate = sprintf("%05d", $replicate);
     my $repldir = "$dir/$replicate";
     unless (-d $repldir) {
         eval "require File::Path";
@@ -103,18 +104,31 @@ foreach my $replicate (1 .. $fakereplicates) {
     my $dummynuclsites = (int(rand(10000)))+1;
     $evolver->set_parameter("nuclsites","$dummynuclsites");
     $evolver->set_parameter("tree_length","1");
-    $evolver->set_parameter("kappa","2");
+    my $dummykappa = (rand(2))+1.5;
+    $evolver->set_parameter("kappa","$dummykappa");
     #FIXME - tree to sum 1
     $evolver->tree($tree);
     my $treeoutfile = Bio::TreeIO->new(-format => 'newick', -file => ">$dir/evolver_indel.input_tree.nh"); #print to STDOUT instead
     $treeoutfile->write_tree($tree);
-    my $dummyomega = (int(rand(10))/10);
+    my $dummyomega = (rand(10)/10)+0.00001;
     $evolver->set_parameter("omega","$dummyomega");
     $evolver->tempdir("$repldir");
     $evolver->save_tempfiles(1);
+    $evolver->indel(1);
     my $dummy = $evolver->prepare();
     my $rc = $evolver->run();
+    my $in;
+    if ($evolver->indel) {
+        $in  = Bio::SeqIO->new
+            ('-file'   => "$repldir/indel_output.fa", 
+             '-format' => 'fasta');
+    }
+    my %seqs; my $seq;
+    while ($seq = $in->next_seq) {
+        $seqs{$seq->display_id} = $seq;
+    }
     print $evolver->error_string, "\n";
+    1;
 }
 
 1;
